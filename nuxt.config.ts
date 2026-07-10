@@ -1,14 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
+  modules: [
+    '@nuxt/eslint',
+    'nuxt-quasar-ui',
+    '@nuxt/fonts',
+  ],
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', 'nuxt-quasar-ui'],
-  quasar: {
-    iconSet: 'mdi-v7',
-    lang: 'es',
-    sassVariables: '~/assets/css/quasar_variables.scss',
-    plugins: ['Dialog', 'Loading', 'Notify'],
-  },
+  css: ['~/assets/css/main.scss'],
   runtimeConfig: {
     public: {
       appName: '',
@@ -16,4 +14,31 @@ export default defineNuxtConfig({
       apiBase: '',
     },
   },
-})
+  compatibilityDate: '2025-07-15',
+  eslint: {
+    config: {
+      stylistic: {
+        indent: 2,
+        semi: true,
+        quotes: 'single',
+        commaDangle: 'always-multiline',
+        braceStyle: '1tbs',
+      },
+    },
+  },
+  fonts: {
+    families: [
+      { name: 'Inter', provider: 'google', weights: [400, 500, 600, 700] },
+      { name: 'Plus Jakarta Sans', provider: 'google', weights: [600, 700, 800] },
+    ],
+  },
+  quasar: {
+    iconSet: 'mdi-v7',
+    lang: 'es',
+    sassVariables: '~/assets/css/quasar_variables.scss',
+    plugins: ['Dialog', 'Loading', 'Notify'],
+    extras: {
+      fontIcons: ['mdi-v7'],
+    },
+  },
+});
