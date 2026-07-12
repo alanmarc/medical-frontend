@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     'nuxt-quasar-ui',
     '@nuxt/fonts',
+    'nuxt-auth-utils',
   ],
   devtools: { enabled: true },
   css: ['~/assets/css/main.scss'],

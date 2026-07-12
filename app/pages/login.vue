@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 definePageMeta({ layout: 'public' });
 
+const { fetch: fetchSession } = useUserSession();
+
 const loading = ref(false);
-const error = ref(false);
+const error = ref<string | null>(null);
 
 const form = reactive({
   email: '',
@@ -10,6 +12,28 @@ const form = reactive({
 });
 
 async function onSubmit() {
+  loading.value = true;
+  error.value = null;
+
+  try {
+    // 1. Llamar al endpoint del servidor Nuxt (BFF)
+    await $fetch('/api/auth/login', {
+      method: 'POST',
+      body: form,
+    });
+
+    // 2. Refrescar la sesión en el cliente (nuxt-auth-utils)
+    await fetchSession();
+
+    // 3. Redirigir a la vista privada
+    navigateTo('/app/dashboard');
+  } catch (err: unknown) {
+    console.error('Error al iniciar sesión:', err);
+    const errorObj = err as { statusMessage?: string; message?: string };
+    error.value = errorObj.statusMessage || errorObj.message || 'Error de autenticación. Inténtelo más tarde.';
+  } finally {
+    loading.value = false;
+  }
 }
 </script>
 

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 definePageMeta({ layout: 'public' });
+const { loggedIn, user } = useUserSession();
 </script>
 
 <template>
@@ -11,20 +12,34 @@ definePageMeta({ layout: 'public' });
         class="q-mr-sm"
       />
       <QToolbarTitle>Medical CRM</QToolbarTitle>
-      <QBtn
-        flat
-        icon="mdi-login"
-        label="Iniciar sesión"
-        to="/login"
-      />
-      <QBtn
-        outline
-        text-color="white"
-        icon="mdi-account-plus"
-        label="Registrarse"
-        to="/register"
-        class="q-ml-sm"
-      />
+
+      <template v-if="loggedIn">
+        <QBtn
+          flat
+          icon="mdi-view-dashboard"
+          label="Ir al Dashboard"
+          to="/app/dashboard"
+        />
+        <span class="q-ml-md text-subtitle2 text-weight-medium text-white">
+          Hola, {{ user?.name }}
+        </span>
+      </template>
+      <template v-else>
+        <QBtn
+          flat
+          icon="mdi-login"
+          label="Iniciar sesión"
+          to="/login"
+        />
+        <QBtn
+          outline
+          text-color="white"
+          icon="mdi-account-plus"
+          label="Registrarse"
+          to="/register"
+          class="q-ml-sm"
+        />
+      </template>
     </QToolbar>
 
     <div class="q-pa-xl text-center">
@@ -37,8 +52,8 @@ definePageMeta({ layout: 'public' });
       <QBtn
         color="primary"
         icon="mdi-arrow-right"
-        label="Comenzar"
-        to="/register"
+        :label="loggedIn ? 'Ir al Dashboard' : 'Comenzar'"
+        :to="loggedIn ? '/app/dashboard' : '/register'"
         class="q-mt-md"
       />
 
