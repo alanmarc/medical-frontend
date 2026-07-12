@@ -16,6 +16,11 @@ export default defineNuxtConfig({
     },
   },
   compatibilityDate: '2025-07-15',
+  typescript: {
+    tsConfig: {
+      include: ['../types/**/*.d.ts'],
+    },
+  },
   eslint: {
     config: {
       stylistic: {

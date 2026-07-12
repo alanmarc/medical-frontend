@@ -4,6 +4,7 @@ declare module '#auth-utils' {
     token: string;
     role: string;
     name: string;
+    permissions: string[];
   }
 }
 

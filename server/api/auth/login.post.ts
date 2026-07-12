@@ -40,6 +40,7 @@ export default defineEventHandler(async (event) => {
           token: tokenData.token, // Guardamos el token para peticiones futuras
           role: 'admin', // De momento mockeamos el rol. Puedes expandirlo al retornar datos de usuario desde tu API.
           name: body.email.split('@')[0], // Nombre temporal derivado del correo
+          permissions: ['appointments:create', 'patients:view'], // Permisos asignados
         },
         loggedInAt: new Date(),
       });

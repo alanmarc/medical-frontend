@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 definePageMeta({ layout: 'public' });
 
-const { fetch: fetchSession } = useUserSession();
+const { fetchSession } = useAuth();
 
 const loading = ref(false);
 const error = ref<string | null>(null);

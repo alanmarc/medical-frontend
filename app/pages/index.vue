@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 definePageMeta({ layout: 'public' });
-const { loggedIn, user } = useUserSession();
+const { loggedIn, user } = useAuth();
 </script>
 
 <template>

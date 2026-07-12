@@ -1,13 +1,8 @@
 <script lang="ts" setup>
-const { user, clear } = useUserSession();
+const { user, logout } = useAuth();
 
 async function handleLogout() {
-  try {
-    await clear();
-    navigateTo('/login');
-  } catch (error) {
-    console.error('Error al cerrar sesión:', error);
-  }
+  await logout();
 }
 
 // Datos mockeados para que la vista dashboard se vea atractiva y "premium"
