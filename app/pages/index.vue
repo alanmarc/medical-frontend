@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 definePageMeta({ layout: 'public' });
+
 const { loggedIn, user } = useAuth();
+
 // Estado interactivo del mockup
 const activeSucursal = ref('Condesa');
 const sucursalesData = ref({
@@ -8,6 +10,7 @@ const sucursalesData = ref({
   Roma: { ingresos: '$118,200', consultas: 280, estado: 'Óptimo', color: 'primary' },
   Polanco: { ingresos: '$189,400', consultas: 410, estado: 'Verificando', color: 'warning' },
 });
+
 // Función de scroll suave
 function scrollToSection(id: string) {
   const element = document.getElementById(id);
@@ -32,24 +35,26 @@ function scrollToSection(id: string) {
             color="primary"
             class="q-mr-xs"
           />
-          <span class="text-h5 text-weight-bold text-slate-900 logo-text">
-            Medical<span class="text-primary text-weight-light">SaaS</span>
+          <span class="text-h5 text-weight-bold text-primary logo-text">
+            Medical<span class="text-secondary text-weight-light">SaaS</span>
           </span>
         </div>
+
         <div class="gt-sm row items-center q-gutter-lg nav-links text-body2 text-weight-medium">
           <span
-            class="cursor-pointer hover-link"
+            class="cursor-pointer hover-link text-grey-8"
             @click="scrollToSection('features')"
           >Funcionalidades</span>
           <span
-            class="cursor-pointer hover-link"
+            class="cursor-pointer hover-link text-grey-8"
             @click="scrollToSection('security')"
           >Seguridad</span>
           <span
-            class="cursor-pointer hover-link"
+            class="cursor-pointer hover-link text-grey-8"
             @click="scrollToSection('testimonials')"
           >Testimonios</span>
         </div>
+
         <div class="row items-center q-gutter-sm">
           <template v-if="loggedIn">
             <QBtn
@@ -73,7 +78,7 @@ function scrollToSection(id: string) {
             <QBtn
               flat
               rounded
-              color="slate-700"
+              color="grey-9"
               label="Iniciar Sesión"
               to="/login"
               class="q-px-md text-weight-medium"
@@ -81,15 +86,16 @@ function scrollToSection(id: string) {
             <QBtn
               unelevated
               rounded
-              color="emerald-accent"
+              color="secondary"
               label="Agendar Demo"
-              class="q-px-lg q-py-sm text-weight-bold cta-nav-btn text-white bg-emerald"
+              class="q-px-lg q-py-sm text-weight-bold hover-scale"
               @click="scrollToSection('cta-final')"
             />
           </template>
         </div>
       </div>
     </QToolbar>
+
     <!-- SECCIÓN 2: HERO SECTION -->
     <section
       id="hero"
@@ -99,25 +105,29 @@ function scrollToSection(id: string) {
         <!-- Columna Izquierda: Texto e Impacto -->
         <div class="col-12 col-md-6 flex flex-start">
           <div class="hero-text-container">
-            <div class="hero-badge q-px-md q-py-xs q-mb-lg rounded-borders text-caption text-weight-bold text-primary bg-primary-light">
+            <div class="q-px-md q-py-xs q-mb-lg rounded-borders text-caption text-weight-bold text-secondary bg-blue-1 inline-block">
               🚀 CONTROL MULTISEDE DEFINITIVO
             </div>
-            <h1 class="text-h2 text-weight-bold leading-tight q-mt-none q-mb-md text-slate-900">
+
+            <h1 class="text-h2 text-weight-bold leading-tight q-mt-none q-mb-md text-primary">
               Toma el
               <span class="text-gradient text-weight-extrabold">control total</span>
               de tus clínicas multisede.
             </h1>
+
             <p class="text-subtitle1 text-grey-8 leading-relaxed q-mb-xl text-weight-light">
               Centraliza agendas, médicos y reportes operativos sin importar cuántas sucursales manejes.
               Simplifica tu gestión, elimina el caos administrativo y asegura el cumplimiento legal de COFEPRIS en México.
             </p>
+
             <div class="column q-gutter-y-sm">
               <div class="row items-center q-gutter-sm">
                 <QBtn
                   unelevated
                   rounded
                   size="lg"
-                  class="bg-emerald text-white text-weight-bold q-px-xl q-py-md hover-scale shadow-2"
+                  color="secondary"
+                  class="text-weight-bold q-px-xl q-py-md hover-scale shadow-2"
                   @click="scrollToSection('cta-final')"
                 >
                   <span class="q-mr-sm">Agendar Demo Corporativa</span>
@@ -133,28 +143,32 @@ function scrollToSection(id: string) {
             </div>
           </div>
         </div>
+
+        <!-- Columna Derecha: Visual Mockup -->
         <div class="col-12 col-md-6">
           <div class="mockup-wrapper relative-position">
             <!-- Círculo decorativo difuminado detrás -->
             <div class="blur-blob absolute-top-right" />
+
             <!-- Ventana del Navegador Mockup -->
             <div class="browser-window flat bordered shadow-3 bg-white">
               <!-- Barra del navegador -->
-              <div class="browser-header row items-center justify-between q-px-md q-py-sm bg-grey-1">
+              <div class="browser-header row items-center justify-between q-px-md q-py-sm bg-grey-2">
                 <div class="row q-gutter-xs">
-                  <div class="dot bg-red" />
-                  <div class="dot bg-yellow" />
-                  <div class="dot bg-green" />
+                  <div class="dot bg-negative" />
+                  <div class="dot bg-warning" />
+                  <div class="dot bg-positive" />
                 </div>
-                <div class="browser-search text-caption text-grey-5 text-center rounded-borders q-px-xl q-py-xs bg-white">
+                <div class="browser-search text-caption text-grey-6 text-center rounded-borders q-px-xl q-py-xs bg-white">
                   medicalsaas.com/app/dashboard
                 </div>
                 <div style="width: 32px" />
               </div>
+
               <!-- Contenido del Dashboard Mockup -->
               <div class="browser-content q-pa-lg">
                 <div class="row justify-between items-center q-mb-md">
-                  <div class="text-subtitle2 text-weight-bold text-slate-800">
+                  <div class="text-subtitle2 text-weight-bold text-primary">
                     Resumen Médico Consolidado
                   </div>
                   <QBadge
@@ -164,6 +178,7 @@ function scrollToSection(id: string) {
                     COFEPRIS NOM-004 Ok
                   </QBadge>
                 </div>
+
                 <div class="row q-col-gutter-md q-mb-md">
                   <div
                     v-for="(data, sucursal) in sucursalesData"
@@ -171,35 +186,36 @@ function scrollToSection(id: string) {
                     class="col-4"
                   >
                     <div
-                      class="stat-box q-pa-sm rounded-borders cursor-pointer transition-all"
-                      :class="activeSucursal === sucursal ? 'bg-primary-light border-primary' : 'bg-grey-1 border-light'"
+                      class="stat-box q-pa-sm rounded-borders cursor-pointer transition-all border-light"
+                      :class="activeSucursal === sucursal ? 'bg-blue-1 text-primary border-primary-light' : 'bg-grey-2 text-grey-8'"
                       @click="activeSucursal = sucursal"
                     >
                       <div class="text-caption text-grey-7">
                         {{ sucursal }}
                       </div>
-                      <div class="text-subtitle2 text-weight-bold text-slate-900">
+                      <div class="text-subtitle2 text-weight-bold text-primary">
                         {{ data.ingresos }}
                       </div>
                     </div>
                   </div>
                 </div>
+
                 <!-- Gráfico de Ingresos Simulado -->
-                <div class="chart-container rounded-borders q-pa-md bg-slate-50 relative-position border-light overflow-hidden">
+                <div class="chart-container rounded-borders q-pa-md bg-grey-2 relative-position border-light overflow-hidden">
                   <div
                     class="row items-end justify-between full-height q-pt-lg"
                     style="height: 120px;"
                   >
                     <div
-                      class="chart-bar bg-blue-300"
+                      class="chart-bar bg-blue-3"
                       style="height: 30%;"
                     />
                     <div
-                      class="chart-bar bg-blue-400"
+                      class="chart-bar bg-blue-4"
                       style="height: 45%;"
                     />
                     <div
-                      class="chart-bar bg-blue-500"
+                      class="chart-bar bg-blue-5"
                       style="height: 60%;"
                     />
                     <div
@@ -207,15 +223,15 @@ function scrollToSection(id: string) {
                       style="height: 85%;"
                     />
                     <div
-                      class="chart-bar bg-teal-400"
+                      class="chart-bar bg-accent"
                       style="height: 70%;"
                     />
                     <div
-                      class="chart-bar bg-teal-500"
+                      class="chart-bar bg-secondary"
                       style="height: 95%;"
                     />
                   </div>
-                  <div class="row justify-between text-caption text-grey-5 q-mt-sm">
+                  <div class="row justify-between text-caption text-grey-6 q-mt-sm">
                     <span>Ene</span>
                     <span>Feb</span>
                     <span>Mar</span>
@@ -224,20 +240,21 @@ function scrollToSection(id: string) {
                     <span>Jun</span>
                   </div>
                 </div>
+
                 <!-- Tarjeta Flotante Glassmorphic -->
                 <div class="floating-glass-card absolute-bottom-left shadow-2 rounded-borders q-pa-md">
-                  <div class="row items-center q-gutter-sm">
+                  <div class="row items-center q-gutter-sm no-wrap">
                     <QAvatar
-                      color="teal-1"
-                      text-color="teal"
+                      color="blue-1"
+                      text-color="primary"
                       icon="mdi-account-check"
                       size="36px"
                     />
                     <div>
-                      <div class="text-weight-bold text-slate-900 text-caption">
+                      <div class="text-weight-bold text-primary text-caption">
                         Consultas Hoy
                       </div>
-                      <div class="text-subtitle2 text-teal font-jakarta text-weight-bold">
+                      <div class="text-subtitle2 text-secondary font-jakarta text-weight-bold">
                         {{ sucursalesData[activeSucursal as keyof typeof sucursalesData].consultas }} pac.
                       </div>
                     </div>
@@ -249,28 +266,30 @@ function scrollToSection(id: string) {
         </div>
       </div>
     </section>
+
     <!-- SECCIÓN 3: LOGOS DE CONFIANZA -->
-    <section class="trust-section bg-grey-50 q-py-lg text-center border-y">
+    <section class="trust-section bg-grey-2 q-py-lg text-center border-y">
       <div class="container">
         <div class="text-subtitle2 text-grey-6 text-uppercase tracking-wider q-mb-md">
           La plataforma en la que confían redes de clínicas en México
         </div>
         <div class="row items-center justify-around q-gutter-md trust-logos">
-          <div class="trust-logo">
+          <div class="trust-logo text-grey-5 text-h6 text-weight-bold">
             Médica Integral
           </div>
-          <div class="trust-logo">
+          <div class="trust-logo text-grey-5 text-h6 text-weight-bold">
             Clínica del Valle
           </div>
-          <div class="trust-logo">
+          <div class="trust-logo text-grey-5 text-h6 text-weight-bold">
             SanaRed
           </div>
-          <div class="trust-logo">
+          <div class="trust-logo text-grey-5 text-h6 text-weight-bold">
             Hospital Lomas
           </div>
         </div>
       </div>
     </section>
+
     <!-- SECCIÓN 4: DOLORES VS SOLUCIONES (BENTO GRID) -->
     <section
       id="features"
@@ -278,49 +297,51 @@ function scrollToSection(id: string) {
     >
       <div class="container">
         <div class="text-center q-mb-xl">
-          <div class="text-caption text-primary text-weight-bold">
+          <div class="text-caption text-secondary text-weight-bold">
             FUNCIONALIDADES CLAVE
           </div>
-          <h2 class="text-h4 text-weight-bold text-slate-900 q-mt-xs q-mb-sm">
+          <h2 class="text-h4 text-weight-bold text-primary q-mt-xs q-mb-sm">
             Diseñado para resolver el caos de la administración médica
           </h2>
           <p class="text-body1 text-grey-6 text-weight-light">
             Todo lo que necesitas para escalar tu negocio y coordinar tus sucursales en un solo sistema.
           </p>
         </div>
+
         <!-- Bento Grid Layout -->
         <div class="row q-col-gutter-lg justify-center">
           <!-- Card 1: El Control -->
           <div class="col-12 col-md-4">
-            <div class="bento-card q-pa-xl flat bordered rounded-borders bg-slate-50 transition-all full-height column justify-between">
+            <QCard class="bento-card q-pa-xl flat bordered bg-grey-1 transition-all full-height column justify-between rounded-borders">
               <div>
-                <div class="icon-box bg-blue-100 text-primary q-pa-sm rounded-borders q-mb-lg flex flex-center inline-block">
+                <div class="bg-blue-1 text-primary q-pa-md rounded-borders inline-block q-mb-lg flex flex-center">
                   <QIcon
                     name="mdi-view-dashboard"
                     size="28px"
                   />
                 </div>
-                <h3 class="text-h6 text-weight-bold text-slate-900 q-mt-none q-mb-md">
+                <h3 class="text-h6 text-weight-bold text-primary q-mt-none q-mb-md">
                   Panel de Control Centralizado
                 </h3>
                 <p class="text-body2 text-grey-7 leading-relaxed text-weight-light">
-                  Monitorea la operación, las agendas de todos tus médicos y los ingresos de cada sede en tiempo real y desde un solo lugar.
+                  Monitorea la operación, las agendas de todos tus médicos and los ingresos de cada sede en tiempo real y desde un solo lugar.
                 </p>
               </div>
               <div class="decor-dot bg-blue-200" />
-            </div>
+            </QCard>
           </div>
+
           <!-- Card 2: Los Datos -->
           <div class="col-12 col-md-4">
-            <div class="bento-card q-pa-xl flat bordered rounded-borders bg-slate-50 transition-all full-height column justify-between">
+            <QCard class="bento-card q-pa-xl flat bordered bg-grey-1 transition-all full-height column justify-between rounded-borders">
               <div>
-                <div class="icon-box bg-teal-100 text-teal q-pa-sm rounded-borders q-mb-lg flex flex-center inline-block">
+                <div class="bg-blue-1 text-secondary q-pa-md rounded-borders inline-block q-mb-lg flex flex-center">
                   <QIcon
                     name="mdi-chart-bar"
                     size="28px"
                   />
                 </div>
-                <h3 class="text-h6 text-weight-bold text-slate-900 q-mt-none q-mb-md">
+                <h3 class="text-h6 text-weight-bold text-primary q-mt-none q-mb-md">
                   Reportes Operativos en un Clic
                 </h3>
                 <p class="text-body2 text-grey-7 leading-relaxed text-weight-light">
@@ -328,19 +349,20 @@ function scrollToSection(id: string) {
                 </p>
               </div>
               <div class="decor-dot bg-teal-200" />
-            </div>
+            </QCard>
           </div>
+
           <!-- Card 3: La Seguridad -->
           <div class="col-12 col-md-4">
-            <div class="bento-card q-pa-xl flat bordered rounded-borders bg-slate-50 transition-all full-height column justify-between">
+            <QCard class="bento-card q-pa-xl flat bordered bg-grey-1 transition-all full-height column justify-between rounded-borders">
               <div>
-                <div class="icon-box bg-emerald-100 text-emerald q-pa-sm rounded-borders q-mb-lg flex flex-center inline-block">
+                <div class="bg-blue-1 text-accent q-pa-md rounded-borders inline-block q-mb-lg flex flex-center">
                   <QIcon
                     name="mdi-shield-check"
                     size="28px"
                   />
                 </div>
-                <h3 class="text-h6 text-weight-bold text-slate-900 q-mt-none q-mb-md">
+                <h3 class="text-h6 text-weight-bold text-primary q-mt-none q-mb-md">
                   Blindaje Legal Garantizado
                 </h3>
                 <p class="text-body2 text-grey-7 leading-relaxed text-weight-light">
@@ -348,20 +370,21 @@ function scrollToSection(id: string) {
                 </p>
               </div>
               <div class="decor-dot bg-emerald-200" />
-            </div>
+            </QCard>
           </div>
         </div>
       </div>
     </section>
+
     <!-- SECCIÓN 5: BLINDAJE LEGAL Y SEGURIDAD (FONDO OSCURO) -->
     <section
       id="security"
-      class="security-section bg-slate-900 text-white q-py-xl"
+      class="bg-primary text-white q-py-xl"
     >
       <div class="container q-py-lg">
         <div class="row q-col-gutter-xl items-center">
           <div class="col-12 col-md-5">
-            <div class="text-caption text-emerald text-weight-bold">
+            <div class="text-caption text-accent text-weight-bold">
               COMPLIANCE & DATOS
             </div>
             <h2 class="text-h4 text-weight-bold leading-tight q-mt-xs q-mb-md text-white">
@@ -372,19 +395,20 @@ function scrollToSection(id: string) {
             </p>
             <div class="q-mt-xl">
               <QBadge
-                color="emerald"
-                class="q-pa-sm text-subtitle2 bg-emerald text-white"
+                color="secondary"
+                class="q-pa-sm text-subtitle2 text-white"
               >
                 HIPAA & COFEPRIS Compliant
               </QBadge>
             </div>
           </div>
+
           <div class="col-12 col-md-7 column q-gutter-y-lg">
             <!-- Bloque A -->
             <div class="row no-wrap items-start q-gutter-md security-block q-pa-lg rounded-borders">
               <QAvatar
-                color="slate-800"
-                text-color="emerald"
+                color="grey-10"
+                text-color="accent"
                 icon="mdi-balance-sheet"
                 size="48px"
                 class="flex-shrink shadow-1"
@@ -398,11 +422,12 @@ function scrollToSection(id: string) {
                 </p>
               </div>
             </div>
+
             <!-- Bloque B -->
             <div class="row no-wrap items-start q-gutter-md security-block q-pa-lg rounded-borders">
               <QAvatar
-                color="slate-800"
-                text-color="emerald"
+                color="grey-10"
+                text-color="accent"
                 icon="mdi-lock-pattern"
                 size="48px"
                 class="flex-shrink shadow-1"
@@ -420,51 +445,59 @@ function scrollToSection(id: string) {
         </div>
       </div>
     </section>
+
     <!-- SECCIÓN 6: PRUEBA SOCIAL (TESTIMONIOS) -->
     <section
       id="testimonials"
-      class="testimonials-section q-py-xl bg-slate-50"
+      class="q-py-xl bg-grey-1"
     >
       <div class="container q-py-lg">
         <div class="text-center q-mb-xl">
-          <div class="text-caption text-primary text-weight-bold">
+          <div class="text-caption text-secondary text-weight-bold">
             TESTIMONIOS
           </div>
-          <h2 class="text-h4 text-weight-bold text-slate-900 q-mt-xs q-mb-none">
+          <h2 class="text-h4 text-weight-bold text-primary q-mt-xs q-mb-none">
             Casos de Éxito en Clínicas
           </h2>
         </div>
+
         <div class="row justify-center">
           <div class="col-12 col-md-8">
             <!-- Card Testimonio Premium -->
-            <QCard class="flat bordered q-pa-xl testimonial-card shadow-1 bg-white relative-position">
+            <QCard
+              class="flat bordered q-pa-xl testimonial-card shadow-1 bg-white relative-position"
+              style="border-radius: 20px;"
+            >
               <QIcon
                 name="mdi-format-quote-open"
                 size="64px"
                 class="absolute-top-left quote-icon"
               />
+
               <QCardSection class="q-py-md relative-position">
-                <p class="text-h5 text-slate-800 text-weight-light italic leading-relaxed quote-text">
+                <p class="text-h5 text-primary text-weight-light italic leading-relaxed quote-text text-grey-9">
                   "Pasamos de gestionar 3 clínicas con un caos administrativo terrible a coordinar 5 sucursales sin esfuerzo. Los reportes consolidados nos ahorran días enteros de trabajo cada mes."
                 </p>
               </QCardSection>
+
               <QSeparator class="q-my-md" />
+
               <QCardSection class="row items-center q-py-none q-gutter-md">
                 <QAvatar
                   size="56px"
-                  color="primary-light"
+                  color="blue-1"
                 >
                   <QIcon
                     name="mdi-account-md"
                     size="36px"
-                    color="primary"
+                    color="secondary"
                   />
                 </QAvatar>
                 <div>
-                  <div class="text-subtitle1 text-weight-bold text-slate-900 leading-none">
+                  <div class="text-subtitle1 text-weight-bold text-primary leading-none">
                     Dra. Claudia Mendoza
                   </div>
-                  <div class="text-caption text-teal text-weight-medium q-mt-xs">
+                  <div class="text-caption text-secondary text-weight-medium q-mt-xs">
                     Directora de Operaciones en Médica Integral
                   </div>
                 </div>
@@ -474,25 +507,31 @@ function scrollToSection(id: string) {
         </div>
       </div>
     </section>
+
     <!-- SECCIÓN 7: FOOTER / CTA FINAL -->
     <section
       id="cta-final"
       class="cta-final-section q-py-xl bg-white"
     >
       <div class="container">
-        <!-- Caja con gradiente de fondo (Gradient Box) -->
-        <div class="gradient-box q-pa-xl text-center rounded-borders shadow-3 text-white">
+        <!-- Caja con gradiente de fondo (Gradient Box) utilizando variables CSS del core de Quasar -->
+        <div
+          class="gradient-box q-pa-xl text-center shadow-3 text-white"
+          style="background: linear-gradient(135deg, var(--q-primary) 0%, var(--q-secondary) 100%); border-radius: 24px;"
+        >
           <h2 class="text-h3 text-weight-bold q-mt-none q-mb-md text-white leading-tight">
             ¿Listo para dejar atrás el caos operativo y escalar tu red de clínicas?
           </h2>
-          <p class="text-subtitle1 text-teal-100 q-mb-xl text-weight-light max-width-600 q-mx-auto">
+          <p class="text-subtitle1 text-blue-1 q-mb-xl text-weight-light max-width-600 q-mx-auto">
             Únete a las redes de clínicas que ya automatizaron su administración, cobranza y cumplimiento legal.
           </p>
           <QBtn
             unelevated
             rounded
             size="lg"
-            class="bg-emerald text-white text-weight-bold q-px-xl q-py-md hover-scale shadow-2"
+            color="white"
+            text-color="primary"
+            class="text-weight-bold q-px-xl q-py-md hover-scale shadow-2"
           >
             <span>Agendar demostración personalizada</span>
             <QIcon
@@ -502,6 +541,7 @@ function scrollToSection(id: string) {
             />
           </QBtn>
         </div>
+
         <!-- Footer Clásico -->
         <footer class="q-mt-xl q-pt-lg border-t text-caption text-grey-6 text-center">
           <div class="row justify-between items-center q-col-gutter-md">
@@ -530,12 +570,14 @@ function scrollToSection(id: string) {
 .font-jakarta {
   font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
 }
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
   width: 100%;
 }
+
 .border-light {
   border: 1px solid rgba(0, 0, 0, 0.08);
 }
@@ -546,37 +588,7 @@ function scrollToSection(id: string) {
 .border-t {
   border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
-/* PALETA DE COLORES PERSONALIZADA */
-.text-slate-800 {
-  color: #1e293b;
-}
-.text-slate-900 {
-  color: #0f172a;
-}
-.bg-slate-50 {
-  background-color: #f8fafc;
-}
-.bg-slate-900 {
-  background-color: #0f172a;
-}
-.bg-primary-light {
-  background-color: rgba(30, 58, 138, 0.08);
-}
-.bg-teal-1 {
-  background-color: rgba(13, 148, 136, 0.08);
-}
-.bg-emerald {
-  background-color: #059669;
-}
-.bg-emerald-100 {
-  background-color: rgba(5, 150, 105, 0.08);
-}
-.text-emerald {
-  color: #059669;
-}
-.text-teal-100 {
-  color: #ccfbf1;
-}
+
 /* NAVBAR */
 .fixed-navbar {
   position: sticky;
@@ -586,59 +598,57 @@ function scrollToSection(id: string) {
   background-color: rgba(255, 255, 255, 0.9) !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
+
 .logo-text {
   letter-spacing: -0.5px;
 }
+
 .hover-link {
-  color: #475569;
   transition: color 0.2s;
   &:hover {
-    color: #1e3a8a;
+    color: var(--q-primary) !important;
   }
 }
-.cta-nav-btn {
-  transition: transform 0.2s;
-  &:hover {
-    transform: scale(1.03);
-  }
-}
+
 /* HERO SECTION */
 .hero-section {
-  background-radial: radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+  background-radial: radial-gradient(circle at 80% 20%, rgba(2, 132, 199, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
   min-height: 80vh;
 }
+
 .hero-text-container {
   max-width: 540px;
 }
-.hero-badge {
-  display: inline-block;
-  letter-spacing: 0.5px;
-}
+
 .text-gradient {
-  background: linear-gradient(135deg, #1e3a8a 0%, #06b6d4 100%);
+  background: linear-gradient(135deg, var(--q-primary) 0%, var(--q-secondary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 /* BUTTON HOVER EFFECTS */
 .hover-scale {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(5, 150, 105, 0.2) !important;
+    box-shadow: 0 10px 20px rgba(2, 132, 199, 0.2) !important;
   }
 }
+
 /* MOCKUP VISUALS */
 .mockup-wrapper {
   perspective: 1000px;
 }
+
 .blur-blob {
   width: 300px;
   height: 300px;
-  background-color: rgba(6, 182, 212, 0.15);
+  background-color: rgba(14, 165, 233, 0.15);
   filter: blur(80px);
   border-radius: 50%;
   z-index: 0;
 }
+
 .browser-window {
   border-radius: 16px;
   overflow: hidden;
@@ -646,29 +656,28 @@ function scrollToSection(id: string) {
   position: relative;
   border: 1px solid rgba(0, 0, 0, 0.08);
 }
-.browser-header {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
+
 .dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
 }
-.bg-red { background-color: #ef4444; }
-.bg-yellow { background-color: #f59e0b; }
-.bg-green { background-color: #10b981; }
+
 .stat-box {
   border: 1px solid transparent;
   text-align: center;
 }
-.border-primary {
-  border-color: rgba(30, 58, 138, 0.2) !important;
+
+.border-primary-light {
+  border-color: rgba(2, 132, 199, 0.2) !important;
 }
+
 .chart-bar {
   width: 12%;
   border-radius: 4px 4px 0 0;
   transition: height 0.5s ease-out;
 }
+
 .floating-glass-card {
   backdrop-filter: blur(16px) saturate(180%);
   background-color: rgba(255, 255, 255, 0.75);
@@ -678,34 +687,21 @@ function scrollToSection(id: string) {
   width: 180px;
   z-index: 10;
 }
-/* TRUST LOGOS */
-.trust-logos {
-  opacity: 0.7;
-}
-.trust-logo {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #94a3b8;
-  letter-spacing: -0.5px;
-}
+
 /* BENTO GRID */
 .bento-card {
-  border-radius: 20px;
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.06);
-  background-color: #f8fafc;
+
   &:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 30px rgba(15, 23, 42, 0.05);
-    background-color: #ffffff;
-    border-color: rgba(30, 58, 138, 0.1);
+    background-color: #ffffff !important;
+    border-color: rgba(2, 132, 199, 0.2);
   }
 }
-.icon-box {
-  width: 48px;
-  height: 48px;
-}
+
 .decor-dot {
   position: absolute;
   bottom: -20px;
@@ -716,6 +712,7 @@ function scrollToSection(id: string) {
   opacity: 0.15;
   filter: blur(10px);
 }
+
 /* SEGURIDAD COMPLIANCE */
 .security-block {
   background-color: rgba(255, 255, 255, 0.03);
@@ -723,39 +720,35 @@ function scrollToSection(id: string) {
   transition: all 0.2s;
   &:hover {
     background-color: rgba(255, 255, 255, 0.05);
-    border-color: rgba(5, 150, 105, 0.3);
+    border-color: rgba(14, 165, 233, 0.3);
   }
 }
+
 /* TESTIMONIOS */
-.testimonial-card {
-  border-radius: 24px;
-}
 .quote-icon {
-  color: rgba(30, 58, 138, 0.04);
+  color: rgba(15, 23, 42, 0.03);
   top: 24px;
   left: 24px;
 }
+
 .quote-text {
   position: relative;
   z-index: 1;
 }
-/* FINAL CTA GRADIENT BOX */
-.gradient-box {
-  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
-  border-radius: 32px;
-  box-shadow: 0 20px 50px rgba(30, 58, 138, 0.15);
-}
+
 .max-width-600 {
   max-width: 600px;
 }
+
 .footer-link {
   color: #64748b;
   text-decoration: none;
   transition: color 0.2s;
   &:hover {
-    color: #1e3a8a;
+    color: var(--q-primary);
   }
 }
+
 /* RESPONSIVE DESIGN ADJUSTMENTS */
 @media (max-width: 960px) {
   .hero-text-container {
