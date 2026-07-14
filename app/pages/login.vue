@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-definePageMeta({ layout: 'public' });
+definePageMeta({
+  layout: 'public',
+});
 
 const { fetchSession } = useAuth();
 
@@ -16,16 +18,16 @@ async function onSubmit() {
   error.value = null;
 
   try {
-    // 1. Llamar al endpoint del servidor Nuxt (BFF)
+    // Llamada al endpoint local de Nitro (BFF)
     await $fetch('/api/auth/login', {
       method: 'POST',
       body: form,
     });
 
-    // 2. Refrescar la sesión en el cliente (nuxt-auth-utils)
+    // Refrescar la sesión en el cliente (nuxt-auth-utils)
     await fetchSession();
 
-    // 3. Redirigir a la vista privada
+    // Redirección segura a la zona privada
     navigateTo('/app/dashboard');
   } catch (err: unknown) {
     console.error('Error al iniciar sesión:', err);
@@ -38,62 +40,131 @@ async function onSubmit() {
 </script>
 
 <template>
-  <div class="row justify-center items-center window-height">
-    <QCard
-      class="q-pa-lg"
-      style="width: 100%; max-width: 400px"
+  <div
+    class="window-height window-width items-stretch bg-accent"
+    :class="$q.screen.gt.xs ? 'q-pa-xl' : 'q-pa-md'"
+  >
+    <q-card
+      class="row full-height"
+      style="background: #E0E8F6;"
     >
-      <QCardSection>
-        <div class="text-h5 text-primary">
-          Iniciar sesión
+      <div class="col-12 col-md-6 flex flex-center gt-sm q-pa-none">
+        <div class="column items-center text-center q-gutter-y-lg full-width">
+          <q-img
+            src="/medical_login.png"
+            spinner-color="white"
+            style="width: 100%;"
+          />
+          <div class="text-secondary q-px-sm">
+            <h2 class="text-h4 text-weight-bold q-mb-sm">
+              Control Médico Centralizado
+            </h2>
+            <p class="text-subtitle1 opacity-80">
+              Gestione sus expedientes clínicos, citas y recetas en un entorno seguro y ágil.
+            </p>
+          </div>
         </div>
-      </QCardSection>
+      </div>
 
-      <QCardSection>
-        <QForm
-          class="q-gutter-md"
-          @submit.prevent="onSubmit"
-        >
-          <QInput
-            v-model="form.email"
-            type="email"
-            label="Correo"
-            filled
-            required
-          />
-          <QInput
-            v-model="form.password"
-            type="password"
-            label="Contraseña"
-            filled
-            required
-          />
+      <div class="col-12 col-md-6 flex flex-center bg-grey-1 q-pa-md">
+        <div style="width: 100%; max-width: 420px;">
+          <div class="q-mb-xl text-center text-md-left">
+            <h1 class="text-h4 text-weight-bold text-primary q-mb-xs">
+              Bienvenido de nuevo
+            </h1>
+            <p class="text-grey-7">
+              Ingrese sus credenciales para acceder a la plataforma médica.
+            </p>
+          </div>
 
-          <QBanner
-            v-if="error"
-            class="bg-negative text-white"
-            dense
+          <q-form
+            class="q-gutter-md"
+            @submit.prevent="onSubmit"
           >
-            {{ error }}
-          </QBanner>
+            <q-input
+              v-model="form.email"
+              type="email"
+              label="Correo electrónico"
+              outlined
+              color="accent"
+              bg-color="white"
+              lazy-rules
+              :rules="[val => !!val || 'El correo electrónico es obligatorio']"
+            >
+              <template #prepend>
+                <q-icon
+                  name="mdi-email-outline"
+                  color="grey-6"
+                />
+              </template>
+            </q-input>
 
-          <QBtn
-            type="submit"
-            color="primary"
-            label="Entrar"
-            :loading="loading"
-            class="full-width"
-          />
-        </QForm>
-      </QCardSection>
+            <q-input
+              v-model="form.password"
+              type="password"
+              label="Contraseña"
+              outlined
+              color="accent"
+              bg-color="white"
+              lazy-rules
+              :rules="[val => !!val || 'La contraseña es obligatoria']"
+            >
+              <template #prepend>
+                <q-icon
+                  name="mdi-lock-outline"
+                  color="grey-6"
+                />
+              </template>
+            </q-input>
 
-      <QCardSection class="text-center">
-        ¿No tienes cuenta?
-        <NuxtLink
-          to="/register"
-          class="text-primary"
-        >Regístrate</NuxtLink>
-      </QCardSection>
-    </QCard>
+            <q-banner
+              v-if="error"
+              class="bg-negative text-white q-my-md"
+              dense
+            >
+              <template #avatar>
+                <q-icon
+                  name="mdi-alert-circle"
+                  color="white"
+                />
+              </template>
+              {{ error }}
+            </q-banner>
+            <div class="flex flex-center">
+              <q-btn
+                type="submit"
+                color="accent"
+                label="Iniciar Sesión"
+                :loading="loading"
+                unevaluated
+                class="full-width q-py-sm text-weight-bold shadow-1 q-mt-lg"
+              />
+            </div>
+          </q-form>
+
+          <div class="text-center q-mt-xl text-grey-7">
+            ¿No tienes una cuenta en el sistema?
+            <NuxtLink
+              to="/register"
+              class="text-accent text-weight-bold text-decoration-none"
+            >
+              Solicitar registro
+            </NuxtLink>
+          </div>
+        </div>
+      </div>
+    </q-card>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.opacity-80 {
+  opacity: 0.8;
+}
+.text-decoration-none {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+</style>
