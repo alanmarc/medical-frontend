@@ -86,7 +86,7 @@ function scrollToSection(id: string) {
             <QBtn
               unelevated
               rounded
-              color="secondary"
+              color="accent"
               label="Agendar Demo"
               class="q-px-lg q-py-sm text-weight-bold hover-scale"
               @click="scrollToSection('cta-final')"
@@ -105,7 +105,7 @@ function scrollToSection(id: string) {
         <!-- Columna Izquierda: Texto e Impacto -->
         <div class="col-12 col-md-6 flex flex-start">
           <div class="hero-text-container">
-            <div class="q-px-md q-py-xs q-mb-lg rounded-borders text-caption text-weight-bold text-secondary bg-blue-1 inline-block">
+            <div class="q-px-md q-py-xs q-mb-lg rounded-borders text-caption text-weight-bold text-accent bg-purple-1 inline-block">
               🚀 CONTROL MULTISEDE DEFINITIVO
             </div>
 
@@ -126,7 +126,7 @@ function scrollToSection(id: string) {
                   unelevated
                   rounded
                   size="lg"
-                  color="secondary"
+                  color="accent"
                   class="text-weight-bold q-px-xl q-py-md hover-scale shadow-2"
                   @click="scrollToSection('cta-final')"
                 >
@@ -187,7 +187,7 @@ function scrollToSection(id: string) {
                   >
                     <div
                       class="stat-box q-pa-sm rounded-borders cursor-pointer transition-all border-light"
-                      :class="activeSucursal === sucursal ? 'bg-blue-1 text-primary border-primary-light' : 'bg-grey-2 text-grey-8'"
+                      :class="activeSucursal === sucursal ? 'bg-purple-1 text-primary border-accent-light' : 'bg-grey-2 text-grey-8'"
                       @click="activeSucursal = sucursal"
                     >
                       <div class="text-caption text-grey-7">
@@ -245,8 +245,8 @@ function scrollToSection(id: string) {
                 <div class="floating-glass-card absolute-bottom-left shadow-2 rounded-borders q-pa-md">
                   <div class="row items-center q-gutter-sm no-wrap">
                     <QAvatar
-                      color="blue-1"
-                      text-color="primary"
+                      color="purple-1"
+                      text-color="accent"
                       icon="mdi-account-check"
                       size="36px"
                     />
@@ -254,7 +254,7 @@ function scrollToSection(id: string) {
                       <div class="text-weight-bold text-primary text-caption">
                         Consultas Hoy
                       </div>
-                      <div class="text-subtitle2 text-secondary font-jakarta text-weight-bold">
+                      <div class="text-subtitle2 text-accent font-jakarta text-weight-bold">
                         {{ sucursalesData[activeSucursal as keyof typeof sucursalesData].consultas }} pac.
                       </div>
                     </div>
@@ -297,7 +297,7 @@ function scrollToSection(id: string) {
     >
       <div class="container">
         <div class="text-center q-mb-xl">
-          <div class="text-caption text-secondary text-weight-bold">
+          <div class="text-caption text-accent text-weight-bold">
             FUNCIONALIDADES CLAVE
           </div>
           <h2 class="text-h4 text-weight-bold text-primary q-mt-xs q-mb-sm">
@@ -314,7 +314,7 @@ function scrollToSection(id: string) {
           <div class="col-12 col-md-4">
             <QCard class="bento-card q-pa-xl flat bordered bg-grey-1 transition-all full-height column justify-between rounded-borders">
               <div>
-                <div class="bg-blue-1 text-primary q-pa-md rounded-borders inline-block q-mb-lg flex flex-center">
+                <div class="bg-blue-1 text-secondary q-pa-md rounded-borders inline-block q-mb-lg flex flex-center">
                   <QIcon
                     name="mdi-view-dashboard"
                     size="28px"
@@ -335,7 +335,7 @@ function scrollToSection(id: string) {
           <div class="col-12 col-md-4">
             <QCard class="bento-card q-pa-xl flat bordered bg-grey-1 transition-all full-height column justify-between rounded-borders">
               <div>
-                <div class="bg-blue-1 text-secondary q-pa-md rounded-borders inline-block q-mb-lg flex flex-center">
+                <div class="bg-purple-1 text-accent q-pa-md rounded-borders inline-block q-mb-lg flex flex-center">
                   <QIcon
                     name="mdi-chart-bar"
                     size="28px"
@@ -348,7 +348,7 @@ function scrollToSection(id: string) {
                   Genera analíticas automáticas por sucursal o globales para tomar decisiones estratégicas basadas en datos reales, no en suposiciones.
                 </p>
               </div>
-              <div class="decor-dot bg-teal-200" />
+              <div class="decor-dot bg-purple-200" />
             </QCard>
           </div>
 
@@ -356,7 +356,7 @@ function scrollToSection(id: string) {
           <div class="col-12 col-md-4">
             <QCard class="bento-card q-pa-xl flat bordered bg-grey-1 transition-all full-height column justify-between rounded-borders">
               <div>
-                <div class="bg-blue-1 text-accent q-pa-md rounded-borders inline-block q-mb-lg flex flex-center">
+                <div class="bg-purple-1 text-accent q-pa-md rounded-borders inline-block q-mb-lg flex flex-center">
                   <QIcon
                     name="mdi-shield-check"
                     size="28px"
@@ -369,7 +369,7 @@ function scrollToSection(id: string) {
                   Expedientes clínicos que cumplen estrictamente con la NOM-004-SSA3-2012 y lineamientos de COFEPRIS de forma nativa en México.
                 </p>
               </div>
-              <div class="decor-dot bg-emerald-200" />
+              <div class="decor-dot bg-purple-200" />
             </QCard>
           </div>
         </div>
@@ -395,7 +395,7 @@ function scrollToSection(id: string) {
             </p>
             <div class="q-mt-xl">
               <QBadge
-                color="secondary"
+                color="accent"
                 class="q-pa-sm text-subtitle2 text-white"
               >
                 HIPAA & COFEPRIS Compliant
@@ -453,7 +453,7 @@ function scrollToSection(id: string) {
     >
       <div class="container q-py-lg">
         <div class="text-center q-mb-xl">
-          <div class="text-caption text-secondary text-weight-bold">
+          <div class="text-caption text-accent text-weight-bold">
             TESTIMONIOS
           </div>
           <h2 class="text-h4 text-weight-bold text-primary q-mt-xs q-mb-none">
@@ -485,19 +485,19 @@ function scrollToSection(id: string) {
               <QCardSection class="row items-center q-py-none q-gutter-md">
                 <QAvatar
                   size="56px"
-                  color="blue-1"
+                  color="purple-1"
                 >
                   <QIcon
                     name="mdi-account-md"
                     size="36px"
-                    color="secondary"
+                    color="accent"
                   />
                 </QAvatar>
                 <div>
                   <div class="text-subtitle1 text-weight-bold text-primary leading-none">
                     Dra. Claudia Mendoza
                   </div>
-                  <div class="text-caption text-secondary text-weight-medium q-mt-xs">
+                  <div class="text-caption text-accent text-weight-medium q-mt-xs">
                     Directora de Operaciones en Médica Integral
                   </div>
                 </div>
@@ -517,12 +517,12 @@ function scrollToSection(id: string) {
         <!-- Caja con gradiente de fondo (Gradient Box) utilizando variables CSS del core de Quasar -->
         <div
           class="gradient-box q-pa-xl text-center shadow-3 text-white"
-          style="background: linear-gradient(135deg, var(--q-primary) 0%, var(--q-secondary) 100%); border-radius: 24px;"
+          style="background: linear-gradient(135deg, var(--q-primary) 0%, var(--q-accent) 100%); border-radius: 24px;"
         >
           <h2 class="text-h3 text-weight-bold q-mt-none q-mb-md text-white leading-tight">
             ¿Listo para dejar atrás el caos operativo y escalar tu red de clínicas?
           </h2>
-          <p class="text-subtitle1 text-blue-1 q-mb-xl text-weight-light max-width-600 q-mx-auto">
+          <p class="text-subtitle1 text-purple-1 q-mb-xl text-weight-light max-width-600 q-mx-auto">
             Únete a las redes de clínicas que ya automatizaron su administración, cobranza y cumplimiento legal.
           </p>
           <QBtn
@@ -606,13 +606,13 @@ function scrollToSection(id: string) {
 .hover-link {
   transition: color 0.2s;
   &:hover {
-    color: var(--q-primary) !important;
+    color: var(--q-accent) !important;
   }
 }
 
 /* HERO SECTION */
 .hero-section {
-  background-radial: radial-gradient(circle at 80% 20%, rgba(2, 132, 199, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+  background-radial: radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
   min-height: 80vh;
 }
 
@@ -621,7 +621,7 @@ function scrollToSection(id: string) {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, var(--q-primary) 0%, var(--q-secondary) 100%);
+  background: linear-gradient(135deg, var(--q-primary) 0%, var(--q-accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -631,7 +631,7 @@ function scrollToSection(id: string) {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(2, 132, 199, 0.2) !important;
+    box-shadow: 0 10px 20px rgba(139, 92, 246, 0.25) !important;
   }
 }
 
@@ -643,7 +643,7 @@ function scrollToSection(id: string) {
 .blur-blob {
   width: 300px;
   height: 300px;
-  background-color: rgba(14, 165, 233, 0.15);
+  background-color: rgba(139, 92, 246, 0.15);
   filter: blur(80px);
   border-radius: 50%;
   z-index: 0;
@@ -668,8 +668,8 @@ function scrollToSection(id: string) {
   text-align: center;
 }
 
-.border-primary-light {
-  border-color: rgba(2, 132, 199, 0.2) !important;
+.border-accent-light {
+  border-color: rgba(139, 92, 246, 0.2) !important;
 }
 
 .chart-bar {
@@ -698,7 +698,7 @@ function scrollToSection(id: string) {
     transform: translateY(-4px);
     box-shadow: 0 20px 30px rgba(15, 23, 42, 0.05);
     background-color: #ffffff !important;
-    border-color: rgba(2, 132, 199, 0.2);
+    border-color: rgba(139, 92, 246, 0.2);
   }
 }
 
@@ -720,7 +720,7 @@ function scrollToSection(id: string) {
   transition: all 0.2s;
   &:hover {
     background-color: rgba(255, 255, 255, 0.05);
-    border-color: rgba(14, 165, 233, 0.3);
+    border-color: rgba(139, 92, 246, 0.3);
   }
 }
 
@@ -745,7 +745,7 @@ function scrollToSection(id: string) {
   text-decoration: none;
   transition: color 0.2s;
   &:hover {
-    color: var(--q-primary);
+    color: var(--q-accent) !important;
   }
 }
 
