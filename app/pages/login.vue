@@ -41,12 +41,13 @@ async function onSubmit() {
 
 <template>
   <div
-    class="window-height window-width items-stretch bg-accent"
+    class="flex flex-center bg-accent"
     :class="$q.screen.gt.xs ? 'q-pa-xl' : 'q-pa-md'"
+    style="min-height: 100vh; width: 100%;"
   >
     <q-card
-      class="row full-height"
-      style="background: #E0E8F6;"
+      class="row shadow-3"
+      style="background: #E0E8F6; width: 100%; max-width: 960px; min-height: 600px; border-radius: 16px; overflow: hidden;"
     >
       <div class="col-12 col-md-6 flex flex-center gt-sm q-pa-none">
         <div class="column items-center text-center q-gutter-y-lg full-width">
@@ -66,9 +67,12 @@ async function onSubmit() {
         </div>
       </div>
 
-      <div class="col-12 col-md-6 flex flex-center bg-grey-1 q-pa-md">
-        <div style="width: 100%; max-width: 420px;">
-          <div class="q-mb-xl text-center text-md-left">
+      <div class="col-12 col-md-6 flex flex-center bg-grey-1 q-pa-lg">
+        <div
+          style="width: 100%; max-width: 420px;"
+          class="q-py-md"
+        >
+          <div class="q-mb-lg text-center text-md-left">
             <h1 class="text-h4 text-weight-bold text-primary q-mb-xs">
               Bienvenido de nuevo
             </h1>
