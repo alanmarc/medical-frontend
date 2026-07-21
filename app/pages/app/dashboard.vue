@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+definePageMeta({
+  auth: 'protected',
+});
+
 const { user, logout } = useAuth();
 
 async function handleLogout() {

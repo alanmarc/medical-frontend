@@ -1,5 +1,8 @@
 <script lang="ts" setup>
-definePageMeta({ layout: 'public' });
+definePageMeta({
+  layout: 'public',
+  auth: 'public',
+});
 
 const { loggedIn, user } = useAuth();
 

@@ -8,4 +8,11 @@ declare module '#auth-utils' {
   }
 }
 
+declare module '#app' {
+  interface PageMeta {
+    auth?: 'public' | 'guest' | 'protected';
+    permissions?: string[];
+  }
+}
+
 export {};

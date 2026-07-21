@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 definePageMeta({
   layout: 'public',
+  auth: 'guest',
 });
 
+const route = useRoute();
 const { fetchSession } = useAuth();
 
 const loading = ref(false);
@@ -27,8 +29,9 @@ async function onSubmit() {
     // Refrescar la sesión en el cliente (nuxt-auth-utils)
     await fetchSession();
 
-    // Redirección segura a la zona privada
-    navigateTo('/app/dashboard');
+    // Redirección segura a la zona privada o a la ruta previa solicitada
+    const redirectPath = (route.query.redirect as string) || '/app/dashboard';
+    navigateTo(redirectPath);
   } catch (err: unknown) {
     console.error('Error al iniciar sesión:', err);
     const errorObj = err as { statusMessage?: string; message?: string };

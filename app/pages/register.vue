@@ -1,5 +1,8 @@
 <script lang="ts" setup>
-definePageMeta({ layout: 'public' });
+definePageMeta({
+  layout: 'public',
+  auth: 'guest',
+});
 
 const loading = ref(false);
 const error = ref<string | null>(null);

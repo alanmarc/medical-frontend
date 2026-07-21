@@ -1,28 +1,46 @@
 export default defineNuxtRouteMiddleware((to) => {
   const { loggedIn, hasPermission } = useAuth();
 
-  // 1. Proteger rutas privadas (cualquiera que empiece con /app)
-  if (to.path.startsWith('/app') && !loggedIn.value) {
-    return navigateTo('/login');
+  // Obtener la estrategia de autenticación definida en definePageMeta (por defecto: 'protected')
+  const authStrategy = (to.meta.auth as 'public' | 'guest' | 'protected' | undefined) ?? 'protected';
+
+  // 1. Rutas reservadas para invitados (ej: /login, /register)
+  if (authStrategy === 'guest') {
+    if (loggedIn.value) {
+      return navigateTo('/app/dashboard');
+    }
+    return;
   }
 
-  // 2. Proteger rutas de invitado (login o registro) si ya está autenticado
-  if ((to.path === '/login' || to.path === '/register') && loggedIn.value) {
-    return navigateTo('/app/dashboard');
+  // 2. Rutas totalmente públicas (ej: landing page /, /terms)
+  if (authStrategy === 'public') {
+    return;
   }
 
-  // 3. Control de acceso basado en permisos (RBAC)
-  if (loggedIn.value) {
-    const requiredPermissions = to.meta.permissions as string[] | undefined;
+  // 3. Rutas protegidas (por defecto todas las demás)
+  if (!loggedIn.value) {
+    const redirectQuery = to.fullPath !== '/' ? { redirect: to.fullPath } : undefined;
+    return navigateTo({
+      path: '/login',
+      query: redirectQuery,
+    });
+  }
 
-    if (requiredPermissions && requiredPermissions.length > 0) {
-      const hasAccess = requiredPermissions.every(p => hasPermission(p));
+  // 4. Control de acceso basado en permisos (RBAC)
+  const requiredPermissions = to.meta.permissions as string[] | undefined;
 
-      // Si no tiene los permisos requeridos, redirigir al dashboard principal
-      if (!hasAccess) {
-        console.warn(`Acceso denegado a la ruta ${to.path} por falta de permisos.`);
-        return navigateTo('/app/dashboard');
+  if (requiredPermissions && requiredPermissions.length > 0) {
+    const hasAccess = requiredPermissions.every(p => hasPermission(p));
+
+    if (!hasAccess) {
+      console.warn(`[Auth] Acceso denegado a la ruta ${to.path} por falta de permisos.`);
+
+      // Prevenir bucle de redirección infinito si la ruta destino desautorizada ya es el dashboard
+      if (to.path === '/app/dashboard') {
+        return createError({ statusCode: 403, statusMessage: 'Acceso No Autorizado' });
       }
+
+      return navigateTo('/app/dashboard');
     }
   }
 });
