@@ -7,7 +7,10 @@ export default defineNuxtRouteMiddleware((to) => {
   // 1. Rutas reservadas para invitados (ej: /login, /register)
   if (authStrategy === 'guest') {
     if (loggedIn.value) {
-      return navigateTo('/app/dashboard');
+      return navigateTo('/app/dashboard', {
+        redirectCode: 302,
+        replace: true,
+      });
     }
     return;
   }
@@ -20,10 +23,16 @@ export default defineNuxtRouteMiddleware((to) => {
   // 3. Rutas protegidas (por defecto todas las demás)
   if (!loggedIn.value) {
     const redirectQuery = to.fullPath !== '/' ? { redirect: to.fullPath } : undefined;
-    return navigateTo({
-      path: '/login',
-      query: redirectQuery,
-    });
+    return navigateTo(
+      {
+        path: '/login',
+        query: redirectQuery,
+      },
+      {
+        redirectCode: 302,
+        replace: true,
+      },
+    );
   }
 
   // 4. Control de acceso basado en permisos (RBAC)
@@ -40,7 +49,10 @@ export default defineNuxtRouteMiddleware((to) => {
         return createError({ statusCode: 403, statusMessage: 'Acceso No Autorizado' });
       }
 
-      return navigateTo('/app/dashboard');
+      return navigateTo('/app/dashboard', {
+        redirectCode: 302,
+        replace: true,
+      });
     }
   }
 });

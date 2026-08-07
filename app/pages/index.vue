@@ -73,41 +73,56 @@ function scrollToSection(id: string) {
 
           <!-- Acciones de la derecha -->
           <div class="row items-center q-gutter-sm">
-            <template v-if="loggedIn">
-              <q-btn
-                flat
-                rounded
-                color="primary"
-                label="Ir al Dashboard"
-                to="/app/dashboard"
-                class="text-weight-medium"
-              />
-              <q-avatar
-                color="primary"
-                text-color="white"
-                size="md"
-                class="q-ml-sm shadow-1"
-              >
-                {{ user?.name?.charAt(0).toUpperCase() || 'U' }}
-              </q-avatar>
-            </template>
-            <template v-else>
-              <q-btn
-                flat
-                color="primary"
-                label="Iniciar Sesión"
-                to="/login"
-                class="text-weight-medium"
-              />
-              <q-btn
-                unelevated
-                rounded
-                color="secondary"
-                label="Agendar Demo"
-                class="text-weight-bold q-px-md"
-                @click="scrollToSection('cta-final')"
-              />
-            </template>
+            <ClientOnly>
+              <template v-if="loggedIn">
+                <q-btn
+                  flat
+                  rounded
+                  color="primary"
+                  label="Ir al Dashboard"
+                  to="/app/dashboard"
+                  class="text-weight-medium"
+                />
+                <q-avatar
+                  color="primary"
+                  text-color="white"
+                  size="md"
+                  class="q-ml-sm shadow-1"
+                >
+                  {{ user?.name?.charAt(0).toUpperCase() || 'U' }}
+                </q-avatar>
+              </template>
+              <template v-else>
+                <q-btn
+                  flat
+                  color="primary"
+                  label="Iniciar Sesión"
+                  to="/login"
+                  class="text-weight-medium"
+                />
+                <q-btn
+                  unelevated
+                  rounded
+                  color="secondary"
+                  label="Agendar Demo"
+                  class="text-weight-bold q-px-md"
+                  @click="scrollToSection('cta-final')"
+                />
+              </template>
+              <template #fallback>
+                <q-skeleton
+                  type="QBtn"
+                  width="110px"
+                  height="36px"
+                  class="q-mr-xs"
+                />
+                <q-skeleton
+                  type="QBtn"
+                  width="130px"
+                  height="36px"
+                />
+              </template>
+            </ClientOnly>
           </div>
         </div>
       </div>

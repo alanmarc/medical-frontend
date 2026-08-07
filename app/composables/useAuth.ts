@@ -15,7 +15,7 @@ export function useAuth() {
   async function logout() {
     try {
       await clear();
-      navigateTo('/login');
+      navigateTo('/login', { replace: true });
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
     }

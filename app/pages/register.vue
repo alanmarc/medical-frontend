@@ -26,8 +26,7 @@ async function onSubmit() {
 
 <template>
   <div
-    class="flex flex-center bg-accent"
-    :class="$q.screen.gt.xs ? 'q-pa-xl' : 'q-pa-md'"
+    class="flex flex-center bg-accent q-pa-md q-pa-sm-xl"
     style="min-height: 100vh; width: 100%;"
   >
     <q-card

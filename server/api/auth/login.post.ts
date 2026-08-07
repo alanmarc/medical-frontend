@@ -1,8 +1,18 @@
+interface LoginUser {
+  email?: string;
+  name?: string;
+  role?: string;
+  permissions?: string[];
+}
+
 interface LoginResponse {
   status: string;
   message?: string;
   data: {
     token: string;
+    user?: LoginUser;
+    role?: string;
+    permissions?: string[];
   };
 }
 
@@ -31,16 +41,22 @@ export default defineEventHandler(async (event) => {
 
     // 2. Verificar la respuesta del API
     if (response && response.status === 'success') {
-      const tokenData = response.data; // Contiene { token: 'oat_...' }
+      const tokenData = response.data;
+      const apiUser = response.data.user;
+
+      // Extraer rol, nombre y permisos dinámicamente desde el backend
+      const userRole = apiUser?.role || response.data.role || 'user';
+      const userName = apiUser?.name || body.email.split('@')[0];
+      const userPermissions = apiUser?.permissions || response.data.permissions || [];
 
       // 3. Guardar la sesión encriptada en Nuxt
       await setUserSession(event, {
         user: {
-          email: body.email,
-          token: tokenData.token, // Guardamos el token para peticiones futuras
-          role: 'admin', // De momento mockeamos el rol. Puedes expandirlo al retornar datos de usuario desde tu API.
-          name: body.email.split('@')[0], // Nombre temporal derivado del correo
-          permissions: ['appointments:create', 'patients:view'], // Permisos asignados
+          email: apiUser?.email || body.email,
+          token: tokenData.token,
+          role: userRole,
+          name: userName,
+          permissions: userPermissions,
         },
         loggedInAt: new Date(),
       });

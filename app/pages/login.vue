@@ -31,7 +31,7 @@ async function onSubmit() {
 
     // Redirección segura a la zona privada o a la ruta previa solicitada
     const redirectPath = (route.query.redirect as string) || '/app/dashboard';
-    navigateTo(redirectPath);
+    navigateTo(redirectPath, { replace: true });
   } catch (err: unknown) {
     console.error('Error al iniciar sesión:', err);
     const errorObj = err as { statusMessage?: string; message?: string };
@@ -44,8 +44,7 @@ async function onSubmit() {
 
 <template>
   <div
-    class="flex flex-center bg-accent"
-    :class="$q.screen.gt.xs ? 'q-pa-xl' : 'q-pa-md'"
+    class="flex flex-center bg-accent q-pa-md q-pa-sm-xl"
     style="min-height: 100vh; width: 100%;"
   >
     <q-card
