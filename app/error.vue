@@ -6,11 +6,13 @@ const props = defineProps({
   },
 });
 
+const { loggedIn } = useAuth();
+
 const statusCode = computed(() => props.error?.statusCode || 500);
 const message = computed(() => props.error?.statusMessage || props.error?.message || 'Ha ocurrido un error inesperado.');
 
 function handleError() {
-  clearError({ redirect: '/' });
+  clearError({ redirect: loggedIn.value ? '/app/dashboard' : '/' });
 }
 </script>
 

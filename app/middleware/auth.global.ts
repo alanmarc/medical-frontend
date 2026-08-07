@@ -1,6 +1,11 @@
 export default defineNuxtRouteMiddleware((to) => {
   const { loggedIn, hasPermission } = useAuth();
 
+  // Si la ruta no existe (404) y no pertenece a la zona privada /app, permitir que alcance error.vue directamente
+  if (to.matched.length === 0 && !to.path.startsWith('/app')) {
+    return;
+  }
+
   // Obtener la estrategia de autenticación definida en definePageMeta (por defecto: 'protected')
   const authStrategy = (to.meta.auth as 'public' | 'guest' | 'protected' | undefined) ?? 'protected';
 
