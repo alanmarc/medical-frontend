@@ -1,20 +1,4 @@
-interface LoginUser {
-  email?: string;
-  name?: string;
-  role?: string;
-  permissions?: string[];
-}
-
-interface LoginResponse {
-  status: string;
-  message?: string;
-  data: {
-    token: string;
-    user?: LoginUser;
-    role?: string;
-    permissions?: string[];
-  };
-}
+import type { BackendLoginResponse } from '~~/shared/types/auth-utils';
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
@@ -31,7 +15,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     // 1. Llamar al backend de AdonisJS con tipado explícito
-    const response = await $fetch<LoginResponse>(`${apiBase}/login`, {
+    const response = await $fetch<BackendLoginResponse>(`${apiBase}/login`, {
       method: 'POST',
       body: {
         email: body.email,
