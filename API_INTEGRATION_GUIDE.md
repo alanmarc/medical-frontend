@@ -649,15 +649,53 @@ Content-Type: application/json
   "status": "success",
   "message": "Acceso exitoso",
   "data": {
-    "type": "bearer",
-    "value": "oat_MTIz.abc123tokenvalue...",
-    "expiresAt": "2026-08-08T06:47:00.000Z"
+    "token": {
+      "type": "bearer",
+      "value": "oat_MTIz.abc123tokenvalue...",
+      "expiresAt": "2026-08-08T06:47:00.000Z"
+    },
+    "user": {
+      "id": 1,
+      "fullName": "Dr. Juan Pérez",
+      "email": "doctor@clinica.com",
+      "roleId": 3,
+      "branchId": 2,
+      "createdAt": "2026-08-07T06:00:00.000Z",
+      "updatedAt": "2026-08-07T06:00:00.000Z",
+      "deletedAt": null,
+      "role": {
+        "id": 3,
+        "name": "doctor",
+        "permissions": [
+          { "id": 1, "name": "patients.view" },
+          { "id": 2, "name": "patients.create" },
+          { "id": 3, "name": "appointments.view" }
+        ]
+      },
+      "branch": {
+        "id": 2,
+        "hospitalId": 1,
+        "name": "Sucursal Norte",
+        "phone": "555-1234",
+        "email": "norte@clinica.com",
+        "address": "Av. Principal 123",
+        "createdAt": "2026-08-07T06:00:00.000Z",
+        "updatedAt": "2026-08-07T06:00:00.000Z",
+        "deletedAt": null,
+        "hospital": {
+          "id": 1,
+          "name": "Hospital Central",
+          "createdAt": "2026-08-07T06:00:00.000Z",
+          "updatedAt": "2026-08-07T06:00:00.000Z",
+          "deletedAt": null
+        }
+      }
+    }
   }
 }
 ```
 
-> **IMPORTANTE:** Guarda `data.value` y úsalo en TODAS las peticiones subsiguientes como:
-> `Authorization: Bearer oat_MTIz.abc123tokenvalue...`
+> **IMPORTANTE:** Guarda `data.token.value` para autorizar peticiones (`Authorization: Bearer <value>`) y guarda `data.user` en el estado global del Frontend (pinia, redux, context) para verificar permisos y restringir vistas.
 
 **Errores posibles:**
 ```json
@@ -671,6 +709,64 @@ Content-Type: application/json
   "code": 422,
   "details": {
     "errors": [{ "field": "email", "message": "The email field must be a valid email address" }]
+  }
+}
+```
+
+---
+
+#### `GET /api/me` — Obtener datos del usuario autenticado
+
+| Atributo | Detalle |
+|----------|---------|
+| **Método** | `GET` |
+| **URL** | `/api/me` |
+| **Acceso** | Privado (`auth` + `loadPermissions`) |
+
+**Headers:** `Authorization: Bearer <token>`
+
+> Devuelve la información completa del usuario actualmente autenticado, con sus relaciones precargadas (`role.permissions` y `branch.hospital`).
+
+**Respuesta exitosa `200 OK`:**
+```json
+{
+  "status": "success",
+  "message": "Usuario autenticado",
+  "data": {
+    "id": 1,
+    "fullName": "Dr. Juan Pérez",
+    "email": "doctor@clinica.com",
+    "roleId": 3,
+    "branchId": 2,
+    "createdAt": "2026-08-07T06:00:00.000Z",
+    "updatedAt": "2026-08-07T06:00:00.000Z",
+    "deletedAt": null,
+    "role": {
+      "id": 3,
+      "name": "doctor",
+      "permissions": [
+        { "id": 1, "name": "patients.view" },
+        { "id": 2, "name": "patients.create" }
+      ]
+    },
+    "branch": {
+      "id": 2,
+      "hospitalId": 1,
+      "name": "Sucursal Norte",
+      "phone": "555-1234",
+      "email": "norte@clinica.com",
+      "address": "Av. Principal 123",
+      "createdAt": "2026-08-07T06:00:00.000Z",
+      "updatedAt": "2026-08-07T06:00:00.000Z",
+      "deletedAt": null,
+      "hospital": {
+        "id": 1,
+        "name": "Hospital Central",
+        "createdAt": "2026-08-07T06:00:00.000Z",
+        "updatedAt": "2026-08-07T06:00:00.000Z",
+        "deletedAt": null
+      }
+    }
   }
 }
 ```
